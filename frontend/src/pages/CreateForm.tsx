@@ -24,15 +24,15 @@ function CreateForm() {
       { question, type: fieldType, required: isRequired },
     ]);
 
-    setQuestion(''); // Limpa o campo de pergunta
+    setQuestion(''); // Clear the question field
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Verifica se ao menos um campo foi adicionado
+    // Checks if at least one field has been added
     if (fields.length === 0) {
-      alert('Por favor, adicione ao menos um campo ao formulário.');
+      alert('Please add at least one field to the form.');
       return;
     }
 
@@ -46,50 +46,49 @@ function CreateForm() {
 
     try {
       await api.post('/form', newForm);
-      alert('Formulário criado com sucesso!');
-      history('/forms'); // Redireciona para a lista de formulários
+      alert('Form created successfully!');
+      history('/forms'); // Redirects to the list of forms
     } catch (error) {
-      console.error('Erro ao criar o formulário:', error);
-      alert('Ocorreu um erro ao criar o formulário. Tente novamente.');
+      console.error('Error creating form:', error);
+      alert('An error occurred while creating the form. Please try again.');
     }
   };
 
   return (
     <div className="pt-16 w-full max-w-4xl mx-auto px-4">
-      <h1 className="text-4xl font-medium text-white mb-6">Criar Novo Formulário</h1>
+      <h1 className="text-4xl font-medium text-white mb-6">Create New Form</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        {/* Nome do Formulário */}
         <div className="mb-4">
-          <label className="font-medium text-white block mb-1">Nome do Formulário</label>
+          <label className="font-medium text-white block mb-1">Form Name</label>
           <input
             type="text"
             value={formName}
             onChange={(e) => setFormName(e.target.value)}
             className="w-full p-2 rounded border border-gray-300"
-            placeholder="Digite o nome do formulário"
+            placeholder="form name"
             required
           />
         </div>
 
         {/* Adicionar Campos ao Formulário */}
         <div className="mb-4">
-          <label className="font-medium text-white block mb-1">Adicionar Campo</label>
+          <label className="font-medium text-white block mb-1">Add Field</label>
           <div className="flex gap-4">
             <input
               type="text"
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               className="w-1/2 p-2 rounded border border-gray-300"
-              placeholder="Pergunta"
+              placeholder="question"
             />
             <select
               value={fieldType}
               onChange={(e) => setFieldType(e.target.value)}
               className="p-2 rounded border border-gray-300"
             >
-              <option value="text">Texto</option>
+              <option value="text">Text</option>
               <option value="email">Email</option>
-              <option value="datetime">Data e Hora</option>
+              <option value="datetime">Date and Time</option>
             </select>
             <div className="flex items-center">
               <input
@@ -98,40 +97,40 @@ function CreateForm() {
                 onChange={() => setIsRequired(!isRequired)}
                 className="mr-2"
               />
-              <span className="text-white">Requerido</span>
+              <span className="text-white">Required</span>
             </div>
             <button
               type="button"
               onClick={handleAddField}
               className="w-1/4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
             >
-              Adicionar
+              Add
             </button>
           </div>
         </div>
 
-        {/* Exibir campos adicionados */}
+        {/* Show added fields */}
         {fields.length > 0 && (
           <div className="mb-6">
-            <h2 className="text-xl text-white mb-2">Campos Adicionados</h2>
+            <h2 className="text-xl text-white mb-2">Added Fields</h2>
             <ul className="text-white">
               {fields.map((field, index) => (
                 <li key={index}>
                   <strong>{field.question}</strong> ({field.type})
-                  {field.required && <span className="text-red-500"> *Requerido</span>}
+                  {field.required && <span className="text-red-500"> *Required</span>}
                 </li>
               ))}
             </ul>
           </div>
         )}
 
-        {/* Botão de Submissão */}
+
         <button
           type="submit"
-          disabled={fields.length === 0} // Desabilita o botão se não houver campos
+          disabled={fields.length === 0} // Disables the button if there are no fields
           className={`w-full py-2 px-4 rounded transition duration-200 ${fields.length === 0 ? 'bg-gray-500' : 'bg-green-500 hover:bg-green-600'} text-white`}
         >
-          Criar Formulário
+          Create Form
         </button>
       </form>
     </div>

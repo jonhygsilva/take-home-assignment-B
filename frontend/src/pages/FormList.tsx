@@ -14,7 +14,7 @@ function FormList() {
     async function loadForms() {
       try {
         const response = await api.get("/form");
-        setForms(response.data.data); // Supondo que a resposta tenha um array de formulários
+        setForms(response.data.data);
       } catch (error) {
         console.error('Error fetching forms:', error);
       }
@@ -24,9 +24,9 @@ function FormList() {
 
   return (
     <div className="pt-16 my-10 w-full max-w-4xl mx-auto px-4">
-      <h1 className="text-4xl font-medium text-white mb-6">Formulários</h1>
+      <h1 className="text-4xl font-medium text-white mb-6">Forms</h1>
 
-      {/* Lista de formulários */}
+      {/* Form list */}
       <section className="flex flex-col gap-4 mb-6">
         {forms.map((form) => (
           <Link key={form.id} to={`/form/${form.id}`} className="w-full bg-white p-4 rounded shadow hover:scale-105 duration-200">
@@ -35,13 +35,13 @@ function FormList() {
         ))}
       </section>
 
-      {/* Botão para criar novo formulário */}
+      {/* create a new form */}
       <div className="flex justify-center">
         <Link
-          to="/create-form" // Caminho para a página de criação
+          to="/create-form"
           className="bg-blue-500 text-white py-2 px-6 rounded hover:bg-blue-600 transition duration-200"
         >
-          Criar Novo Formulário
+          Create new form
         </Link>
       </div>
     </div>

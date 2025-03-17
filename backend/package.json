@@ -14,12 +14,15 @@
     "doc": "docs"
   },
   "devDependencies": {
+    "@eslint/js": "^9.22.0",
     "@types/node": "^18.19.70",
-    "@typescript-eslint/eslint-plugin": "^5.57.0",
-    "@typescript-eslint/parser": "^5.48.1",
-    "eslint": "^8.36.0",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint": "^8.57.1",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.37.4",
+    "globals": "^16.0.0",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.7",
     "prisma": "^6.2.1",
