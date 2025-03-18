@@ -15,7 +15,7 @@ function App() {
           <Route path="/forms" element={<FormList />} />
           <Route path="/form/:id" element={<FormDetail />} />
           <Route path='/create-form' element={<CreateForm/>}/>
-          <Route path="/form-fills/:id" element={<FormFills />} />
+          <Route path="/form-fills/:id/:name" element={<FormFills />} />
         </Routes>
       </div>
     </Router>

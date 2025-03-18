@@ -1,6 +1,7 @@
 import { FastifyInstance } from 'fastify'
 
 import { SourceData, SourceRecord } from '@prisma/client'
+import { submissionSchema, getSubmissionsSchema } from './schemas/submission_schemas';
 
 import prisma from '../db/db_client'
 import { serializer } from './middleware/pre_serializer'
@@ -15,27 +16,26 @@ async function submissionRoutes(app: FastifyInstance) {
   app.get<{
     Params: IEntityId
     Reply: SourceData[]
-  }>('/:id/submissions', {
+  }>('/form/:id', {
+    schema: getSubmissionsSchema,
     async handler(req, reply) {
       const { params } = req
       const { id } = params
       log.debug('get all submissions by a formId')
 
       try {
-        const form = await prisma.sourceData.findMany({
+        const submissions = await prisma.sourceData.findMany({
           where: {
             sourceRecord: {
               formId: {
                 equals: id
               }
             }
-          },
-          include: {
-            sourceRecord: true,
-
           }
         })
-        reply.send(form)
+
+
+        reply.send(submissions)
       } catch (err: any) {
         log.error({ err }, err.message)
         throw new ApiError('failed to fetch all submissions by a formId', 400)
@@ -50,9 +50,10 @@ async function submissionRoutes(app: FastifyInstance) {
     };
     Reply: {
       message: string;
-      sourceRecord: SourceRecord;
+      sourceData: Object;
     };
-  }>('/submission', {
+  }>('', {
+    schema: submissionSchema,
     async handler(req, reply) {
       const { formId, answers } = req.body
   
@@ -76,13 +77,11 @@ async function submissionRoutes(app: FastifyInstance) {
           data: sourceDataEntries,
         });
   
-        
         reply.status(201).send({
           message: 'Form submission created successfully!',
-          sourceRecord,
+          sourceData: sourceDataEntries,
         });
       } catch (err: any) {
-        
         log.error({ err }, err.message);
         throw new ApiError('failed to create a submission', 400);
       }

@@ -89,6 +89,13 @@ function CreateForm() {
               <option value="text">Text</option>
               <option value="email">Email</option>
               <option value="datetime">Date and Time</option>
+              <option value="password">Password</option>
+              <option value="tel">Phone Number</option>
+              <option value="date">Date</option>
+              <option value="time">Time</option>
+              <option value="datetime-local">Date & Time</option>
+              <option value="url">URL</option>
+              <option value="color">Color Picker</option>
             </select>
             <div className="flex items-center">
               <input

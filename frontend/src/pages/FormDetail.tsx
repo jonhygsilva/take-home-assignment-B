@@ -56,7 +56,7 @@ function FormDetail() {
     }
 
     try {
-      const response = await api.post('/form/submission', {
+      const response = await api.post('/submission', {
         formId: id,
         answers,
       });
@@ -74,6 +74,7 @@ function FormDetail() {
 
   // Function to capture form responses
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, fieldId: string) => {
+    //add the new answer to the list of awnsers
     setAnswers((prevAnswers) => ({
       ...prevAnswers,
       [fieldId]: e.target.value,
@@ -118,9 +119,9 @@ function FormDetail() {
       </form>
 
       {/* Link to the filling page */}
-      <div className="mt-6">
+      <div className="mt-6 pb-10">
         <Link
-          to={`/form-fills/${id}`}
+          to={`/form-fills/${id}/${form.name}`}
           className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition duration-200"
         >
           Completed Forms

@@ -18,31 +18,28 @@ type GroupedFill = {
 };
 
 function FormFills() {
-  const { id } = useParams(); // form id
+  const { id, name } = useParams(); // form id
   const [fills, setFills] = useState<GroupedFill[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     async function loadFormFills() {
       try {
-        const response = await api.get(`/form/${id}/submissions`);
+        const response = await api.get(`/submission/form/${id}`);
         const data = response.data.data;
 
-        // group fillers by `sourceRecordId`
-        const groupedData = data.reduce((acc: GroupedFill[], fill: Fill) => {
-          const existingGroup = acc.find((group) => group.sourceRecordId === fill.sourceRecordId);
-
-          if (existingGroup) {
-            existingGroup.questions.push({ question: fill.question, answer: fill.answer });
-          } else {
-            acc.push({
+        const groupedData: GroupedFill[] = Array.from(data.reduce((acc: Map<string, GroupedFill>, fill: Fill) => {
+          if (!acc.has(fill.sourceRecordId)) {
+            acc.set(fill.sourceRecordId, {
               sourceRecordId: fill.sourceRecordId,
-              questions: [{ question: fill.question, answer: fill.answer }],
+              questions: [],
             });
           }
-
+        
+          acc.get(fill.sourceRecordId)?.questions.push({ question: fill.question, answer: fill.answer });
+        
           return acc;
-        }, []);
+        }, new Map()).values());
 
         setFills(groupedData);
       } catch (error) {
@@ -72,6 +69,7 @@ function FormFills() {
   return (
     <div className="pt-16 my-10 w-full max-w-4xl mx-auto px-4 mt-6 min-h-screen">
       <h1 className="text-4xl font-medium text-white mb-6">Completed Forms</h1>
+      <h2 className="text-2xl font-medium text-white mb-6">Form name: {name}</h2>
       <button
         onClick={() => navigate(-1)}
         className="mb-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
