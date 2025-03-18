@@ -5,8 +5,12 @@
 - `docker compose build`
 - `docker compose up`
 - enter in the backend folder
--- `npm run migrate`
--- `npm run seed`
+  - `npm run migrate`
+  - `npm run seed`
 
 ## Introduction
-The objective of this application is to create a system where the client is able to view all created forms, create a new form with specific fields, fill out a form and finally view all the fillings of a specific form.
+The purpose of this application is to create a system where the client can interact with forms. The application has the following functionalities: 
+- view all created forms
+- create a new form with specific fields
+- fill out a form
+- view all the fillings of a specific form
