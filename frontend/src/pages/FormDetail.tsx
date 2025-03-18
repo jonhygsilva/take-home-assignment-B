@@ -32,8 +32,6 @@ function FormDetail() {
           ...value,
         }));
 
-        console.log(fieldsArray)
-
         // update the form state
         setForm({ ...rawForm, fields: fieldsArray });
       } catch (error) {
