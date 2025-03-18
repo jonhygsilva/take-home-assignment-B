@@ -19,6 +19,7 @@ function CreateForm() {
   const handleAddField = () => {
     if (question.trim() === '') return;
 
+    // add the new field to the list of fields
     setFields((prevFields) => [
       ...prevFields,
       { question, type: fieldType, required: isRequired },
@@ -27,6 +28,7 @@ function CreateForm() {
     setQuestion(''); // Clear the question field
   };
 
+  // submit the new form
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -36,6 +38,9 @@ function CreateForm() {
       return;
     }
 
+    console.log(fields)
+
+    // transform the data to the form object to save
     const newForm = {
       name: formName,
       fields: fields.reduce((acc, field, index) => {
@@ -44,8 +49,10 @@ function CreateForm() {
       }, {}),
     };
 
+    // call the API rest to create a new form
     try {
       await api.post('/form', newForm);
+
       alert('Form created successfully!');
       history('/forms'); // Redirects to the list of forms
     } catch (error) {

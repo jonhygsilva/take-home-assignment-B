@@ -1,3 +1,6 @@
+/**
+ * Swagger schemas for form routes
+ */
 
 const getFormSchema = {
     description: 'Fetch a form by its ID',
@@ -47,7 +50,7 @@ const createFormSchema = {
       properties: {
         name: { type: 'string' }, 
         fields: { 
-          type: 'array', 
+          type: 'object', 
           items: { type: 'object' }
         }
       },
@@ -59,7 +62,7 @@ const createFormSchema = {
         properties: {
           id: { type: 'string' },
           name: { type: 'string' },
-          fields: { type: 'array', items: { type: 'object' } }
+          fields: { type: 'object', items: { type: 'object' } }
         }
       }
     }

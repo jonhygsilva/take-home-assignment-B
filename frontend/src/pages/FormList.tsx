@@ -10,6 +10,7 @@ type Form = {
 function FormList() {
   const [forms, setForms] = useState<Form[]>([]);
 
+  //load all the forms
   useEffect(() => {
     async function loadForms() {
       try {

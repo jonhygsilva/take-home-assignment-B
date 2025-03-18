@@ -12,8 +12,8 @@ function build(opts = {}) {
   app.register(swagger, {
     swagger: {
       info: {
-        title: 'API Documentation',
-        description: 'API Documentation for my Fastify project',
+        title: 'API Forms Documentation',
+        description: 'Forms documentation API',
         version: '1.0.0',
       },
       consumes: ['application/json'],

@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify'
 
-import { SourceData, SourceRecord } from '@prisma/client'
+import { SourceData } from '@prisma/client'
 import { submissionSchema, getSubmissionsSchema } from './schemas/submission_schemas';
 
 import prisma from '../db/db_client'
@@ -13,6 +13,9 @@ async function submissionRoutes(app: FastifyInstance) {
 
   const log = app.log.child({ component: 'submissionRoutes' })
 
+  /**
+   * get a submission by a formId
+   */
   app.get<{
     Params: IEntityId
     Reply: SourceData[]
@@ -24,6 +27,7 @@ async function submissionRoutes(app: FastifyInstance) {
       log.debug('get all submissions by a formId')
 
       try {
+        // all sourceData (submissions) related to a form, by the relation of sourceRecord and formId
         const submissions = await prisma.sourceData.findMany({
           where: {
             sourceRecord: {
@@ -43,6 +47,9 @@ async function submissionRoutes(app: FastifyInstance) {
     },
   })
 
+  /**
+   * Create a new submission
+   */
   app.post<{
     Body: {
       formId: string

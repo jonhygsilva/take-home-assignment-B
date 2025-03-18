@@ -1,3 +1,6 @@
+/**
+ * swagger schemas for submissions routes 
+ */
 const getSubmissionsSchema = {
   description: 'Fetch all submissions by form ID',
   tags: ['submissions'],

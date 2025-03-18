@@ -22,12 +22,14 @@ function FormFills() {
   const [fills, setFills] = useState<GroupedFill[]>([]);
   const navigate = useNavigate();
 
+  // load the form fills
   useEffect(() => {
     async function loadFormFills() {
       try {
         const response = await api.get(`/submission/form/${id}`);
         const data = response.data.data;
 
+        // group the fills acording the sourceRecordId, to show each submission
         const groupedData: GroupedFill[] = Array.from(data.reduce((acc: Map<string, GroupedFill>, fill: Fill) => {
           if (!acc.has(fill.sourceRecordId)) {
             acc.set(fill.sourceRecordId, {
@@ -52,6 +54,7 @@ function FormFills() {
     }
   }, [id]);
 
+  // if dont have any fills, show a message
   if (fills.length === 0) {
     return (
       <div className="w-full min-h-screen flex flex-col items-center justify-center bg-gray-900">

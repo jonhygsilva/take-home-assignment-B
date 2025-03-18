@@ -13,6 +13,9 @@ async function formRoutes(app: FastifyInstance) {
 
   const log = app.log.child({ component: 'formRoutes' })
 
+  /**
+   * get form by a formId
+   */
   app.get<{
     Params: IEntityId
     Reply: Form
@@ -32,6 +35,9 @@ async function formRoutes(app: FastifyInstance) {
     },
   })
 
+  /**
+   * get all forms
+   */
   app.get<{
     Params: IEntityId
     Reply: Form[]
@@ -50,6 +56,9 @@ async function formRoutes(app: FastifyInstance) {
     },
   })
 
+  /**
+   * create a new form
+   */
   app.post<{
     Body: {
       name: string,
