@@ -18,8 +18,8 @@ The purpose of this application is to create a system where the client can inter
 - view all the fillings of a specific form
 
 ## Tech stack
-* [React] (https://react.dev/)
-* [Vite] (https://vite.dev/)
+* [React](https://react.dev/)
+* [Vite](https://vite.dev/)
 * [Node](https://nodejs.org/en/)
 * [Typescript](www.google.com)
 * [Fastify](https://www.fastify.io/)
