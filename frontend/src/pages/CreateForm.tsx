@@ -38,8 +38,6 @@ function CreateForm() {
       return;
     }
 
-    console.log(fields)
-
     // transform the data to the form object to save
     const newForm = {
       name: formName,
